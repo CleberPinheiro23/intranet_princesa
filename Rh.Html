@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel de Controle - RH</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f4f4f4;
+        }
+
+        .navbar {
+            background-color: #29277b;
+        }
+
+        .navbar-brand img {
+            height: 50px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin-top: 40px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .item {
+            margin-bottom: 10px;
+            background-color: #e9ecef;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .item button {
+            background-color: #ff4c4c;
+        }
+
+        .img-preview {
+            width: 100%;
+            max-height: 200px;
+            object-fit: contain;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="https://www.princesadoeste.com.br/wp-content/uploads/2019/01/LogoPrincesaDoeste389.png" alt="Logo">
+            </a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h2 class="text-center text-primary mt-3">Painel de Controle - RH</h2>
+
+        <!-- Quadro de Avisos -->
+        <h4 class="text-primary mt-4">Quadro de Avisos</h4>
+        <input type="file" id="imagemAviso" class="form-control" accept="image/*">
+        <button class="btn btn-success mt-2" onclick="adicionarAviso()">Adicionar Aviso</button>
+        <div id="avisosList" class="mt-4"></div>
+
+        <!-- Seção de Feriados -->
+        <h4 class="text-primary mt-4">Gerenciar Feriados</h4>
+        <input type="text" id="nomeFeriado" class="form-control" placeholder="Nome do feriado">
+        <input type="date" id="dataFeriado" class="form-control mt-2">
+        <button class="btn btn-success mt-2" onclick="adicionarFeriado()">Adicionar Feriado</button>
+        <div id="feriadosList" class="mt-4"></div>
+
+        <!-- Seção de Aniversariantes -->
+        <h4 class="text-primary mt-4">Gerenciar Aniversariantes</h4>
+        <input type="text" id="nomeAniversariante" class="form-control" placeholder="Nome do aniversariante">
+        <input type="date" id="dataAniversario" class="form-control mt-2">
+        <button class="btn btn-success mt-2" onclick="adicionarAniversariante()">Adicionar Aniversariante</button>
+        <div id="aniversariantesList" class="mt-4"></div>
+    </div>
+
+    <script>
+        // Função para carregar todos os dados do localStorage ao iniciar a página
+        function carregarDados() {
+            mostrarAvisos();
+            mostrarFeriados();
+            mostrarAniversariantes();
+        }
+
+        // Quadro de Avisos
+        function adicionarAviso() {
+            const input = document.getElementById('imagemAviso');
+            const file = input.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    let avisos = JSON.parse(localStorage.getItem('avisos')) || [];
+                    avisos.push(e.target.result);
+                    localStorage.setItem('avisos', JSON.stringify(avisos));
+                    mostrarAvisos();
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function mostrarAvisos() {
+            const avisosList = document.getElementById('avisosList');
+            const avisos = JSON.parse(localStorage.getItem('avisos')) || [];
+            avisosList.innerHTML = avisos.map((aviso, index) => `
+                <div class="item">
+                    <img src="${aviso}" class="img-preview" alt="Aviso">
+                    <button class="btn btn-danger btn-sm mt-2" onclick="removerAviso(${index})">Remover</button>
+                </div>`).join('');
+        }
+
+        function removerAviso(index) {
+            let avisos = JSON.parse(localStorage.getItem('avisos')) || [];
+            avisos.splice(index, 1);
+            localStorage.setItem('avisos', JSON.stringify(avisos));
+            mostrarAvisos();
+        }
+
+        // Gerenciar Feriados
+        function adicionarFeriado() {
+            const nome = document.getElementById('nomeFeriado').value;
+            const data = document.getElementById('dataFeriado').value;
+            if (nome && data) {
+                let feriados = JSON.parse(localStorage.getItem('feriados')) || [];
+                feriados.push({ nome, data });
+                localStorage.setItem('feriados', JSON.stringify(feriados));
+                mostrarFeriados();
+            }
+        }
+
+        function mostrarFeriados() {
+            const lista = document.getElementById('feriadosList');
+            const feriados = JSON.parse(localStorage.getItem('feriados')) || [];
+            lista.innerHTML = feriados.map((feriado, index) => `
+                <div class="item">
+                    <strong>${feriado.nome}</strong> - ${feriado.data}
+                    <button class="btn btn-danger btn-sm" onclick="removerFeriado(${index})">Remover</button>
+                </div>`).join('');
+        }
+
+        function removerFeriado(index) {
+            let feriados = JSON.parse(localStorage.getItem('feriados')) || [];
+            feriados.splice(index, 1);
+            localStorage.setItem('feriados', JSON.stringify(feriados));
+            mostrarFeriados();
+        }
+
+        // Gerenciar Aniversariantes
+        function adicionarAniversariante() {
+            const nome = document.getElementById('nomeAniversariante').value;
+            const data = document.getElementById('dataAniversario').value;
+            if (nome && data) {
+                let aniversariantes = JSON.parse(localStorage.getItem('aniversariantes')) || [];
+                aniversariantes.push({ nome, data });
+                localStorage.setItem('aniversariantes', JSON.stringify(aniversariantes));
+                mostrarAniversariantes();
+            }
+        }
+
+        function mostrarAniversariantes() {
+            const lista = document.getElementById('aniversariantesList');
+            const aniversariantes = JSON.parse(localStorage.getItem('aniversariantes')) || [];
+            lista.innerHTML = aniversariantes.map((aniversariante, index) => `
+                <div class="item">
+                    <strong>${aniversariante.nome}</strong> - ${aniversariante.data}
+                    <button class="btn btn-danger btn-sm" onclick="removerAniversariante(${index})">Remover</button>
+                </div>`).join('');
+        }
+
+        function removerAniversariante(index) {
+            let aniversariantes = JSON.parse(localStorage.getItem('aniversariantes')) || [];
+            aniversariantes.splice(index, 1);
+            localStorage.setItem('aniversariantes', JSON.stringify(aniversariantes));
+            mostrarAniversariantes();
+        }
+
+        // Carregar dados ao iniciar a página
+        window.onload = carregarDados;
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel RH - Página Inicial</title>
+    <!-- Link para o Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        /* Estilo Personalizado */
+        body {
+            background-color: #e0f4f1;
+            /* Fundo mais claro de #2da299 */
+            font-family: 'Arial', sans-serif;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+/* Contêiner do Cabeçalho com Menu */
+.header-container {
+    display: flex;
+    align-items: center;  /* Alinhamento vertical do conteúdo */
+    justify-content: center;  /* Alinhamento horizontal do conteúdo */
+    padding: 20px;
+    background-color: white;
+    margin-bottom: 20px;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Logotipo */
+.logo {
+    display: flex;
+    justify-content: right;  /* Alinha o logotipo à direita */
+}
+
+.logo img {
+    max-width: 200px;  /* Limita o tamanho máximo do logotipo */
+    width: 100%;
+}
+
+/* Título */
+.title {
+    color: #29277b;
+    font-size: 2em;
+    font-weight: bold;
+    text-align: center;  /* Centraliza o texto horizontalmente */
+    width: 100%;  /* Garante que o título ocupe toda a largura disponível */
+    margin-top: 0;  /* Remove margens superiores para controle fino */
+    padding-top: 10px;  /* Ajusta o espaço acima do título */
+    padding-bottom: 10px;  /* Ajusta o espaço abaixo do título */
+    transform: translateY(5px);  /* Ajuste fino para mover o título verticalmente */
+    
+    /* Ajuste manual para mover o título para os lados */
+    margin-left: -250px;  /* Desloca o título para a esquerda, altere o valor conforme necessário */
+    /* margin-right: 20px;  /* Desloca o título para a direita, altere o valor conforme necessário */
+    /* Ou use transform: translateX() */
+    /* transform: translateX(20px);  /* Desloca o título para a direita */
+    /* Ou para a esquerda: */
+    /* transform: translateX(-20px);  /* Desloca o título para a esquerda */
+}
+
+
+
+
+        /* Menu de Navegação */
+        .menu {
+            display: flex;
+            gap: 20px;
+            justify-content: flex-end;
+            /* Alinha os itens à direita */
+            margin-top: -100px;
+            margin-right: 100px;
+        }
+
+        /* Estilos dos Links no Menu */
+        .menu a {
+            color: #29277b;
+            /* Cor do texto do menu */
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        /* Efeito ao passar o mouse sobre os links */
+        .menu a:hover {
+            color: #2da299;
+            /* Cor ao passar o mouse */
+        }
+
+
+
+        /* Carrossel com fundo */
+        .carousel-container {
+            position: relative;
+            background-color: #29277b;
+            padding: 40px 0;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin-top: 90px;
+            width: 90%;
+            /* Deixa o contêiner mais estreito */
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .carousel-item img {
+            position: relative;
+            object-fit: cover;
+            /* Ajusta a imagem para cobrir toda a área */
+            width: 100%;
+            /* Preenche a largura do container */
+            height: 500px;
+            /* Altura fixa de 250px */
+            margin-left: auto;
+            margin-right: auto;
+            border-radius: 10px;
+        }
+
+        .carousel-control-prev-icon,
+        .carousel-control-next-icon {
+            background-color: #2da299;
+        }
+
+        /* Container de Seções (Feriados e Aniversariantes) */
+        .section-container {
+            margin-top: 40px;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+            width: 90%;
+            /* Deixa o contêiner mais estreito */
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 1.8em;
+            color: #29277b;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .info-line {
+            font-size: 1.2em;
+            color: #2da299;
+            /* Cor dos nomes dos aniversariantes e feriados */
+            text-align: center;
+            line-height: 1.5;
+        }
+
+        .info-line span {
+            font-weight: bold;
+        }
+
+        /* Responsividade para dispositivos móveis */
+        @media (max-width: 768px) {
+            .carousel-item img {
+                height: 300px;
+            }
+
+            .title {
+                font-size: 1.8em;
+            }
+
+            .section-title {
+                font-size: 1.5em;
+            }
+
+            .info-line {
+                font-size: 1em;
+            }
+
+            .menu {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .header-container {
+                width: 80%;
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Cabeçalho com Logotipo, Menu e Título -->
+    <div class="header-container">
+        <!-- Logotipo -->
+        <div class="logo">
+            <a href="https://www.princesadoeste.com.br/" target="_blank">
+                <img src="https://www.princesadoeste.com.br/wp-content/uploads/2019/01/LogoPrincesaDoeste389.png"
+                    alt="Viação Princesa do Oeste">
+            </a>
+        </div>
+
+        <!-- Título "Intranet" movido para dentro do cabeçalho -->
+        <h1 class="title">Bem Vindo A Intranet</h1>
+    </div>
+
+    <!-- Menu de Navegação -->
+    <div class="menu">
+        <a href="#" target="_blank">Home</a>
+        <a href="#" target="_blank">Formulários</a>
+        <a href="#" target="_blank">Notícias</a>
+        <a href="#" target="_blank">Contatos</a>
+    </div>
+
+
+
+    <!-- Carrossel com fundo -->
+    <div class="carousel-container">
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+            </ol>
+            <div id="carouselContainer" class="carousel-inner"></div>
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- Container para Feriados -->
+    <div class="section-container">
+        <div class="section-title">Feriados</div>
+        <div id="feriadosLine" class="info-line"></div>
+    </div>
+
+    <!-- Container para Aniversariantes -->
+    <div class="section-container">
+        <div class="section-title">Aniversariantes</div>
+        <div id="aniversariantesLine" class="info-line"></div>
+    </div>
+
+    <!-- Scripts do Bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        let currentIndex = 0;
+
+        function carregarDados() {
+            const avisos = JSON.parse(localStorage.getItem('avisosImagens')) || [];
+            const feriados = JSON.parse(localStorage.getItem('feriados')) || [];
+            const aniversariantes = JSON.parse(localStorage.getItem('aniversariantes')) || [];
+
+            mostrarAvisos(avisos);
+            mostrarFeriados(feriados);
+            mostrarAniversariantes(aniversariantes);
+            mostrarCarrossel(avisos);
+        }
+
+        function mostrarAvisos(avisos) {
+            // Remover a exibição dos avisos como miniaturas, agora são só no carrossel
+        }
+
+        function mostrarCarrossel(avisos) {
+            const carouselContainer = document.getElementById('carouselContainer');
+            carouselContainer.innerHTML = '';  // Limpa o carrossel
+
+            avisos.forEach((aviso, index) => {
+                const div = document.createElement('div');
+                div.classList.add('carousel-item');
+                if (index === 0) div.classList.add('active');
+
+                const img = document.createElement('img');
+                img.src = aviso;
+                div.appendChild(img);
+                carouselContainer.appendChild(div);
+            });
+
+            setInterval(() => {
+                moverCarrossel(1);  // Move para a próxima imagem
+            }, 5000);  // A cada 5 segundos
+        }
+
+        function moverCarrossel(direcao) {
+            const carouselContainer = document.getElementById('carouselContainer');
+            const items = carouselContainer.children;
+            const totalItems = items.length;
+
+            currentIndex = (currentIndex + direcao + totalItems) % totalItems;
+            for (let i = 0; i < totalItems; i++) {
+                items[i].classList.remove('active');
+            }
+
+            items[currentIndex].classList.add('active');
+        }
+
+        function mostrarFeriados(feriados) {
+            const linhaFeriados = document.getElementById('feriadosLine');
+            linhaFeriados.innerHTML = '';  // Limpa antes de mostrar novamente
+
+            feriados.forEach(feriado => {
+                linhaFeriados.innerHTML += `<span>${feriado.nome} - ${formataData(feriado.data)}</span> * `;
+            });
+        }
+
+        function mostrarAniversariantes(aniversariantes) {
+            const listaAniversariantes = document.getElementById('aniversariantesLine');
+            listaAniversariantes.innerHTML = '';  // Limpa antes de mostrar novamente
+
+            const hoje = new Date();
+            const mesAtual = hoje.getMonth() + 1; // Mes atual (de 1 a 12)
+
+            const aniversariantesMes = aniversariantes.filter(aniversariante => {
+                const data = new Date(aniversariante.data);
+                return data.getMonth() + 1 === mesAtual;
+            });
+
+            aniversariantesMes.forEach(aniversariante => {
+                listaAniversariantes.innerHTML += `<span>${aniversariante.nome} - ${formataData(aniversariante.data)}</span> * `;
+            });
+        }
+
+        function formataData(data) {
+            const date = new Date(data);
+            const dia = date.getDate().toString().padStart(2, '0');
+            const mes = (date.getMonth() + 1).toString().padStart(2, '0');
+            const ano = date.getFullYear();
+            return `${dia}/${mes}/${ano}`;
+        }
+
+        carregarDados();
+    </script>
+</body>
+
+</html>
